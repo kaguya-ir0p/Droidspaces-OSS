@@ -6,6 +6,8 @@
 
     nixpkgs-with-systemd-v259.url = "github:NixOS/nixpkgs/b86751bc4085f48661017fa226dee99fab6c651b";
 
+    nixpkgs-with-systemd-v257-9.url = "github:NixOS/nixpkgs/3cbe716e2346710d6e1f7c559363d14e11c32a43";
+
     flake-utils.url = "github:numtide/flake-utils";
 
     artifacts = {
@@ -178,6 +180,12 @@
 
           minimal-with-systemd-v259 =
             (inputs.nixpkgs-with-systemd-v259.lib.nixosSystem {
+              inherit system;
+              modules = [self.nixosModules.working-droidspaces-rootfs-minimal];
+            }).config.system.build.tarball;
+
+          minimal-with-systemd-v257-9 =
+            (inputs.nixpkgs-with-systemd-v257-9.lib.nixosSystem {
               inherit system;
               modules = [self.nixosModules.working-droidspaces-rootfs-minimal];
             }).config.system.build.tarball;
